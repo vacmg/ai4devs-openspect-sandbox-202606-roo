@@ -31,3 +31,4 @@ Funcionó a la primera, pero quise iterar para utilizar una libreria en vez de h
 
 Una mejora que harías si volvieras a hacerlo.
 
+Decidir de antemano si quieres usar una libreria o no, para no tener que iterar despues.
