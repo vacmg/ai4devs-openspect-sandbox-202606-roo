@@ -32,3 +32,14 @@ Funcionó a la primera, pero quise iterar para utilizar una libreria en vez de h
 Una mejora que harías si volvieras a hacerlo.
 
 Decidir de antemano si quieres usar una libreria o no, para no tener que iterar despues.
+
+
+
+Parte 2:
+
+No acabo de entender para que sirve /opsx:ff, ¿Que diferencia hay con /opsx:new? ¿Por qué usarias uno en lugar del otro?
+
+¿Cual es el formato o plantilla que se debe usar en un delta spec?
+
+Me parece interesante que mantenga el historial de prompts en openspec/changes/archive, pensaba que no sería interesante mantener esa información.
+
