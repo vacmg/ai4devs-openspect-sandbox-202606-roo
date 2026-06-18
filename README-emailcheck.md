@@ -15,23 +15,28 @@ cmd/emailcheck/   # binario CLI (lee stdin, devuelve exit code)
 validator/        # paquete con la validación RFC 5322 + tests
 ```
 
-## Estándar implementado
+## Validación: librería estándar `net/mail`
 
-Se valida la sintaxis **addr-spec** definida en
-[RFC 5322 §3.4.1](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1):
+En lugar de implementar la gramática de RFC 5322 desde cero, la validación
+delega en la **librería estándar de Go
+[`net/mail`](https://pkg.go.dev/net/mail)**, cuya función `mail.ParseAddress`
+implementa el parser de direcciones de [RFC 5322
+§3.4.1](https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1).
 
-- `local-part` puede ser:
-  - `dot-atom`: secuencias de `atext` separadas por puntos (sin puntos al
-    inicio/fin ni dobles). `atext` incluye letras, dígitos y los símbolos
-    ``! # $ % & ' * + - / = ? ^ _ ` { | } ~``.
-  - `quoted-string`: `"..."` con `qtext` y `quoted-pair` (`\X`).
-- `domain` es un `dot-atom` con etiquetas LDH (RFC 1035): letras, dígitos y
-  guiones, sin guiones al inicio/fin, longitud de etiqueta 1..63, y al menos
-  dos etiquetas (TLD obligatorio).
-- Límites prácticos: `local-part` ≤ 64, total ≤ 254, dominio ≤ 253.
+Sobre eso aplicamos dos reglas adicionales:
 
-No se soportan `domain-literal` (`[IPv4/IPv6]`) ni comentarios CFWS, por ser
-inusuales y desaconsejados en la práctica (RFC 5321).
+1. **Solo addr-spec puro**: rechazamos formas con display-name como
+   `John Doe <john@example.com>` comprobando que `addr.Name == ""` y que
+   `addr.Address` coincide con la entrada literal (también descarta
+   comentarios CFWS).
+2. **Dominio con al menos un punto**: descartamos `user@host` (que el parser
+   acepta) ya que no es una dirección enrutable en la práctica.
+
+> Nota: `net/mail` no aplica las reglas LDH estrictas del RFC 1035 al
+> dominio (acepta guion bajo, etiquetas que empiezan/terminan con guion,
+> etc.) ni el límite de 64 octetos en local-part. Si necesitas esa
+> estrictez, conviene añadir una capa adicional o una librería externa
+> como `github.com/go-playground/validator`.
 
 ## Compilar
 

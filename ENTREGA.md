@@ -2,11 +2,11 @@
 
 *Pilar 1 — Herramienta:* ¿Cuál eliges?
 
-Github copilot dentro de un IDE (Categoría A).
+Github copilot en modo Agente dentro de un IDE (Categoría B).
 
 ¿Por qué esta y no otra?
 
-Porque el objetivo final es una función que valide emails, es una feature suficientemente pequeña para que se pueda resolver de forma interactiva en minutos.
+Porque el objetivo final es una función que valide emails, es una feature relativamente sencilla, y el agente deberia ser capaz de preparar el entorno de desarrollo, crear la estructura de carpetas y archivos, y generar la logica de validacion con TDD.
 
 *Pilar 2 — Contexto:* ¿Qué información estás aportando? (lenguaje, framework, restricciones, ejemplos…)
 
@@ -21,5 +21,13 @@ Quiero hacer una aplicacion para terminal en go que reciba por stdin un email y 
 Quiero garantizar que la aplicacion funciona mediante tests usando TDD.
 Quiero que compruebes que los emails siguen el estandar donde se define la sintaxis de los emails.
 
+Second prompt:
+
+Si existe alguna libreria estandar o muy conocida para validar emails, quiero que la uses en vez de escribir la logica de validacion desde cero.
+
 *Resultado:* ¿Funcionó a la primera o tuviste que iterar?
+
+Funcionó a la primera, pero quise iterar para utilizar una libreria en vez de hacer la logica de cero.
+
 Una mejora que harías si volvieras a hacerlo.
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/validator/validator.go">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/validator/validator.go" />
+              <option name="updatedContent" value="// Package validator valida direcciones de email usando la librería estándar&#10;// de Go `net/mail`, que implementa el parser de direcciones de RFC 5322.&#10;//&#10;// Se exige que la entrada sea una addr-spec pura (sin display-name ni&#10;// comentarios CFWS), por lo que verificamos que el resultado de ParseAddress&#10;// coincide con la entrada y no incluye nombre.&#10;package validator&#10;&#10;import (&#10;&#9;&quot;net/mail&quot;&#10;&#9;&quot;strings&quot;&#10;)&#10;&#10;// IsValid devuelve true si s es una dirección de email válida según RFC 5322&#10;// usando el parser de net/mail. Adicionalmente:&#10;//&#10;//   - Rechaza formatos con display-name (`Nombre &lt;addr@host&gt;`).&#10;//   - Exige al menos un punto en el dominio (descarta `user@host`, que el&#10;//     parser acepta pero no es una dirección enrutable en la práctica).&#10;func IsValid(s string) bool {&#10;&#9;if s == &quot;&quot; {&#10;&#9;&#9;return false&#10;&#9;}&#10;&#9;addr, err := mail.ParseAddress(s)&#10;&#9;if err != nil {&#10;&#9;&#9;return false&#10;&#9;}&#10;&#9;if addr.Name != &quot;&quot; || addr.Address != s {&#10;&#9;&#9;return false&#10;&#9;}&#10;&#9;at := strings.LastIndex(s, &quot;@&quot;)&#10;&#9;if at &lt; 0 {&#10;&#9;&#9;return false&#10;&#9;}&#10;&#9;domain := s[at+1:]&#10;&#9;if !strings.Contains(domain, &quot;.&quot;) {&#10;&#9;&#9;return false&#10;&#9;}&#10;&#9;return true&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
